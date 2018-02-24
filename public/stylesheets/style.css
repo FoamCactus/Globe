@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+#overlay {
+    z-index: 99;
+    position: absolute;
+    background-color: black;
+    color: white;
+    left: 0;
+    bottom: 0;
+    width: 500px;
+    height: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

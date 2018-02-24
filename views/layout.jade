@@ -5,12 +5,14 @@ html
         link(rel='stylesheet', href='/stylesheets/style.css')
 
     body
+        block overlay
         block content
         script(src ="/webgl-globe-master/globe/third-party/Detector.js")
         script(src ="/webgl-globe-master/globe/third-party/three.min.js")
         script(src ="/webgl-globe-master/globe/third-party/Tween.js")
         script(src ="/webgl-globe-master/globe/globe.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script.
             var socket = io('localhost:8080');
             socket.on('tweet', function (data) {
@@ -37,4 +39,11 @@ html
                 }
             }
             function readTweet(data) {
+                if($("#overlay").children.length <= 5) {
+                    var tweet = JSON.parse(data);
+                    $("#overlay").append("<p class='tweet'>" + tweet[0][2].text + "</p>");
+                    $(".tweet").delay(1000).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
             }

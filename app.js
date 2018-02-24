@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
             tlocation[2] = Math.random();
             t[0] = tweet["user"].name;
             t[1] = tlocation;
-            t[3] = tweet;
+            t[2] = tweet;
             tweets.push(t);
             socket.emit('tweet', JSON.stringify(tweets));
         }
