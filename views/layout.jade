@@ -1,51 +1,40 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
 
-  body
-    block content
-    script(src ="/webgl-globe-master/globe/third-party/Detector.js")
-    script(src ="/webgl-globe-master/globe/third-party/three.min.js")
-    script(src ="/webgl-globe-master/globe/third-party/Tween.js")
-    script(src ="/webgl-globe-master/globe/globe.js")
-    script.
-        var container = document.getElementById( 'container' );
-        var globe = new DAT.Globe( container );
-
-        // We're going to ask a file for the JSON data.
-        var xhr = new XMLHttpRequest();
-
-        // Where do we get the data?
-
-        setInterval(function() {
-            xhr.open('GET', '/tweets', true);
-            // What do we do when we have it?
-            xhr.onreadystatechange = function () {
-                // If we've received the data
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Parse the JSON
-                    var data = JSON.parse(xhr.responseText);
-
-                    // Tell the globe about your JSON data
-                    if(data) {
-                        for (var i = 0; i < data.length; i++) {
-                            console.log(data);
-                            globe.addData(data[i][1], {format: 'magnitude', name: 'tweets'});
-                        }
+    body
+        block content
+        script(src ="/webgl-globe-master/globe/third-party/Detector.js")
+        script(src ="/webgl-globe-master/globe/third-party/three.min.js")
+        script(src ="/webgl-globe-master/globe/third-party/Tween.js")
+        script(src ="/webgl-globe-master/globe/globe.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
+        script.
+            var socket = io('localhost:8080');
+            socket.on('tweet', function (data) {
+                addData(data);
+                readTweet(data);
+            });
+            var container = document.getElementById('container');
+            var globe = new DAT.Globe(container);
+            // Create the geometry
+            globe.createPoints();
+            // Begin animation
+            globe.animate();
+            // We're going to ask a file for the JSON data.
+            function addData(data) {
+                var tweets = JSON.parse(data);
+                // Tell the globe about your JSON data
+                if (tweets) {
+                    for (var i = 0; i < tweets.length; i++) {
+                        console.log(tweets);
+                        globe.addData(tweets[i][1], {format: 'magnitude', name: tweets[i][1]});
                     }
-
-
-                    // Create the geometry
                     globe.createPoints();
-
-                    // Begin animation
                     globe.animate();
-
-
                 }
-            };
-            xhr.send(null);
-        }, 2000);
-
+            }
+            function readTweet(data) {
+            }

@@ -15,6 +15,7 @@
     "morgan": "~1.9.0",
     "pubnub": "^4.20.1",
     "pubnub-twitter": "^1.0.2",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "socket.io": "^2.0.4"
   }
 }

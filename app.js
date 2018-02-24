@@ -8,7 +8,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var tweets = require('./routes/tweets');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var stream = require('pubnub-twitter/pubnub-twitter');
 
+server.listen(8080);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -39,6 +43,24 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+io.on('connection', function (socket) {
+    var tweets = [];
+    var t = [];
+    var tlocation = [];
+    stream(function (tweet) {
+        if(tweet["geo"] && tweet["geo"].type === "Point"){
+            tlocation[0] = tweet["geo"].coordinates[0];
+            tlocation[1] = tweet["geo"].coordinates[1];
+            tlocation[2] = Math.random();
+            t[0] = tweet["user"].name;
+            t[1] = tlocation;
+            t[3] = tweet;
+            tweets.push(t);
+            socket.emit('tweet', JSON.stringify(tweets));
+        }
+    });
 });
 
 module.exports = app;
