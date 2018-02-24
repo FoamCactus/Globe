@@ -251,6 +251,11 @@ DAT.Globe = function (container, opts) {
                     morphTargets: true
                 }));
             }
+            var id = uuidv4();
+            this.points.name = id;
+            setTimeout(function() {
+                scene.remove(scene.getObjectByName(id));
+            }, 10000);
             scene.add(this.points);
         }
     }
@@ -417,3 +422,9 @@ DAT.Globe = function (container, opts) {
 
 };
 
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
