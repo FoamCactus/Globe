@@ -2,6 +2,8 @@
 logs
 *.log
 
+.idea/
+*.iml
 # Runtime data
 pids
 *.pid
