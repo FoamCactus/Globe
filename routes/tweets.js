@@ -5,16 +5,13 @@ var stream = require('pubnub-twitter/pubnub-twitter');
 router.get('/', function (req, res, next) {
     var tweets = [];
     stream(function (tweet) {
-        if(tweet["geo"]){
+        if(tweet["geo"] && tweet["geo"].type === "Point"){
             tweets.push(tweet);
-            }
-    });
-    while(true) {
-        if(tweets.length > 100) {
-            break;
         }
-    }
-    res.send(tweets);
+    });
+    setTimeout(function(){
+            res.send(tweets);
+    },300);
 });
 
 module.exports = router;
