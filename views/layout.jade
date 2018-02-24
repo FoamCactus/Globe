@@ -3,5 +3,16 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
     block content
+    script(src ="/webgl-globe-master/globe/third-party/Detector.js")
+    script(src ="/webgl-globe-master/globe/third-party/three.min.js")
+    script(src ="/webgl-globe-master/globe/third-party/Tween.js")
+    script(src ="/webgl-globe-master/globe/globe.js")
+    script.
+        var container = document.getElementById( 'container' );
+        var globe = new DAT.Globe( container );
+         globe.createPoints();
+         globe.animate();
+
