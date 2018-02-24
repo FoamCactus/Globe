@@ -32,7 +32,7 @@ html
                     if(data) {
                         for (var i = 0; i < data.length; i++) {
                             console.log(data);
-                            globe.addData(data, {format: 'magnitude', name: 'tweets'});
+                            globe.addData(data[i][1], {format: 'magnitude', name: 'tweets'});
                         }
                     }
 

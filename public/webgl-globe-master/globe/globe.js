@@ -149,7 +149,7 @@ DAT.Globe = function(container, opts) {
 
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(w, h);
-
+    renderer.setClearColor(0xffffff, 0);
     renderer.domElement.style.position = 'absolute';
 
     container.appendChild(renderer.domElement);
