@@ -9,9 +9,12 @@ router.get('/', function (req, res, next) {
             tweets.push(tweet);
             }
     });
-    setTimeout((function () {
-        res.send(tweets);
-    }), 500);
+    while(true) {
+        if(tweets.length > 100) {
+            break;
+        }
+    }
+    res.send(tweets);
 });
 
 module.exports = router;
