@@ -87,6 +87,12 @@ DAT.Globe = function(container, opts) {
 
   function init() {
 
+      window.addEventListener('resize', function () {
+          setTimeout(function() {
+              init();
+          }, 500);
+      });
+
     container.style.color = '#fff';
     container.style.font = '13px/20px Arial, sans-serif';
 
