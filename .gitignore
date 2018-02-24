@@ -2,7 +2,7 @@
 logs
 *.log
 
-.idea/
+.idea/*
 *.iml
 # Runtime data
 pids
@@ -30,6 +30,3 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
