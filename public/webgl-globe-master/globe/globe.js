@@ -246,7 +246,7 @@ DAT.Globe = function (container, opts) {
             this.points.name = id;
             setTimeout(function () {
                 scene.remove(scene.getObjectByName(id));
-            }, 10000);
+            }, 50000);
             scene.add(this.points);
         }
     }

@@ -50,7 +50,7 @@ io.on('connection', function (socket) {
     var tlocation = [];
     stream(function (tweet) {
         if(tweet["geo"] && tweet["geo"].type === "Point"){
-            tlocation = [tweet["geo"].coordinates[0], tweet["geo"].coordinates[1], 0.5];
+            tlocation = [tweet["geo"].coordinates[0], tweet["geo"].coordinates[1], 0.1];
             t[0] = tweet["user"].name;
             t[1] = tlocation;
             t[2] = tweet;
