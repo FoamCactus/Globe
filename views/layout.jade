@@ -14,8 +14,9 @@ html
         script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
         script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script.
-            var count = 0;
-            var socket = io('localhost:8080');
+            var count = 0
+            var host = 'ec2-18-219-199-19.us-east-2.compute.amazonaws.com';
+            var socket = io(host+':8080');
             socket.on('tweet', function (data) {
                 $("#tweetCount").html(" Tweets: " + count++);
                 addData(data);
