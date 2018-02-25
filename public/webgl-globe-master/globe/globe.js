@@ -221,7 +221,6 @@ DAT.Globe = function (container, opts) {
         } else {
             this._baseGeometry = subgeo;
         }
-
     };
 
     function createPoints() {
@@ -253,7 +252,7 @@ DAT.Globe = function (container, opts) {
             }
             var id = uuidv4();
             this.points.name = id;
-            setTimeout(function() {
+            setTimeout(function () {
                 scene.remove(scene.getObjectByName(id));
             }, 10000);
             scene.add(this.points);
@@ -368,6 +367,11 @@ DAT.Globe = function (container, opts) {
     function render() {
         zoom(curZoomSpeed);
 
+        target.x -= 0.003;
+
+        rotation.x += (target.x - rotation.x) * 0.2;
+        target.y = Math.PI / 5.0;
+        rotation.y += (target.y - rotation.y) * 0.02;
         rotation.x += (target.x - rotation.x) * 0.1;
         rotation.y += (target.y - rotation.y) * 0.1;
         distance += (distanceTarget - distance) * 0.3;
@@ -423,7 +427,7 @@ DAT.Globe = function (container, opts) {
 };
 
 function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });

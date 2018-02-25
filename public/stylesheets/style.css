@@ -10,12 +10,24 @@ a {
 #overlay {
     z-index: 99;
     position: absolute;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     left: 0;
     bottom: 0;
     width: 500px;
-    height: 250px;
+    height: 300px;
     text-overflow: ellipsis;
     overflow: hidden;
+    padding: 10px;
+}
+
+#tweetCount {
+    z-index: 99;
+    font-size: 24px;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 150px;
 }

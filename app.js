@@ -46,19 +46,15 @@ app.use(function(err, req, res, next) {
 });
 
 io.on('connection', function (socket) {
-    var tweets = [];
     var t = [];
     var tlocation = [];
     stream(function (tweet) {
         if(tweet["geo"] && tweet["geo"].type === "Point"){
-            tlocation[0] = tweet["geo"].coordinates[0];
-            tlocation[1] = tweet["geo"].coordinates[1];
-            tlocation[2] = Math.random();
+            tlocation = [tweet["geo"].coordinates[0], tweet["geo"].coordinates[1], 0.5];
             t[0] = tweet["user"].name;
             t[1] = tlocation;
             t[2] = tweet;
-            tweets.push(t);
-            socket.emit('tweet', JSON.stringify(tweets));
+            socket.emit('tweet', JSON.stringify(t));
         }
     });
 });

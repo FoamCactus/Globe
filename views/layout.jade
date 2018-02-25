@@ -14,8 +14,10 @@ html
         script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
         script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script.
+            var count = 0;
             var socket = io('localhost:8080');
             socket.on('tweet', function (data) {
+                $("#tweetCount").html(" Tweets: " + count++);
                 addData(data);
                 readTweet(data);
             });
@@ -27,21 +29,16 @@ html
             globe.animate();
             // We're going to ask a file for the JSON data.
             function addData(data) {
-                var tweets = JSON.parse(data);
+                var tweet = JSON.parse(data);
                 // Tell the globe about your JSON data
-                if (tweets) {
-                    for (var i = 0; i < tweets.length; i++) {
-                        console.log(tweets);
-                        globe.addData(tweets[i][1], {format: 'magnitude', name: tweets[i][1]});
-                    }
-                    globe.createPoints();
-                }
+                globe.addData(tweet[1], {format: 'magnitude', name: tweet[0]});
+                globe.createPoints();
             }
             function readTweet(data) {
-                if($("#overlay").children.length <= 5) {
+                if ($("#overlay").children.length <= 10) {
                     var tweet = JSON.parse(data);
-                    $("#overlay").append("<p class='tweet'>" + tweet[0][2].text + "</p>");
-                    $(".tweet").delay(1000).fadeOut("normal", function () {
+                    $("#overlay").prepend("<p class='tweet'>" + tweet[2].text + "</p>");
+                    $(".tweet").delay(500).fadeOut("normal", function () {
                         $(this).remove();
                     });
                 }
